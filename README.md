@@ -1,22 +1,31 @@
 # react-native-input-outline
 
-Performant React Native Text Inputs
+I built this library because of all the performance issues I noticed in other TextInput libraries I noticed.
+This library is extremely performant thanks to Reanimated v2, and I'm very proud of it.
+
+Performant React Native Text Inputs built with Reanimated 2.
 
 ## Installation
 
 ```sh
-npm install react-native-input-outline
+yarn add react-native-reanimated@2.0.0-rc.0 react-native-input-outline
 ```
+
+Reanimated v2 is required for this library to work.
 
 ## Usage
 
 ```js
-import InputOutline from "react-native-input-outline";
+import { InputOutline } from 'react-native-input-outline';
 
-// ...
-
-const result = await InputOutline.multiply(3, 7);
+<InputOutline />;
 ```
+
+All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput#props) are supported as well as others configured from this library shown below.
+
+### Props
+
+All props will be shown here.
 
 ## Contributing
 
