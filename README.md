@@ -26,7 +26,7 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 ### Props
 
 | Prop                | Desription                                                                                                                                                                                              | Default   | Type     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- |
+| ------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | -------- |
 | `placeholder`       | Placeholder for the `textinput`.                                                                                                                                                                        |           | `string` |
 | `fontSize`          | Font size for TextInput.                                                                                                                                                                                | `14`      | `number` |
 | `paddingVertical`   | Vertical padding for TextInput Container. Used to calculate animations.                                                                                                                                 | `12`      | `number` |
