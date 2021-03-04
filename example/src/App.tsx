@@ -7,10 +7,12 @@ export default function App() {
   const inputRef = React.useRef(null);
 
   const focus = () => {
+    // @ts-ignore
     inputRef.current?.focus();
   };
 
   const blur = () => {
+    // @ts-ignore
     inputRef.current?.blur();
   };
 

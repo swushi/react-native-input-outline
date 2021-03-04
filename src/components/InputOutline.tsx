@@ -2,6 +2,7 @@ import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import {
   StyleSheet,
   TextInput,
+  TextInputProps,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -24,10 +25,30 @@ export interface InputOutlineMethods {
   blur: () => void;
 }
 
-export interface InputOutlineProps {
+export interface InputOutlineProps extends TextInputProps {
+  /**
+   * Placeholder for the textinput.
+   * @default Placeholder
+   * @type string
+   */
   placeholder?: string;
+  /**
+   * Placeholder font size.
+   * @default 14
+   * @type number
+   */
   placeholderFontSize?: number;
+  /**
+   * Color when focused.
+   * @default blue
+   * @type string
+   */
   activeColor?: string;
+  /**
+   * Color when blurred (not focused).
+   * @default black
+   * @type string
+   */
   inactiveColor?: string;
 }
 
@@ -39,6 +60,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       placeholderFontSize = 14,
       activeColor = 'blue',
       inactiveColor = 'black',
+      ...inputProps
     } = props;
 
     // animation vars
@@ -117,6 +139,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               pointerEvents="none"
               onFocus={handleFocus}
               onSubmitEditing={handleBlur}
+              {...inputProps}
             />
           </View>
         </TouchableWithoutFeedback>
