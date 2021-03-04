@@ -5,11 +5,20 @@ import { InputOutline } from 'react-native-input-outline';
 
 export default function App() {
   const inputRef = React.useRef(null);
+
+  const focus = () => {
+    inputRef.current?.focus();
+  };
+
+  const blur = () => {
+    inputRef.current?.blur();
+  };
+
   return (
     <View style={styles.container}>
       <InputOutline ref={inputRef} />
-      <Button onPress={() => inputRef.current?.focus()} title="Focus" />
-      <Button onPress={() => inputRef.current?.blur()} title="Blur" />
+      <Button onPress={focus} title="Focus" />
+      <Button onPress={blur} title="Blur" />
     </View>
   );
 }

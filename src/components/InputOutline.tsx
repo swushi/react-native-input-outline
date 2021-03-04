@@ -10,6 +10,7 @@ import Animated, {
   withTiming,
   useAnimatedStyle,
   interpolate,
+  interpolateColor,
 } from 'react-native-reanimated';
 
 export interface InputOutlineMethods {
@@ -26,13 +27,19 @@ export interface InputOutlineMethods {
 export interface InputOutlineProps {
   placeholder?: string;
   placeholderFontSize?: number;
-  placeholderColor?: string | number;
+  activeColor?: string;
+  inactiveColor?: string;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
   (props, ref) => {
     // establish provided props
-    const {} = props;
+    const {
+      placeholder = 'Placeholder',
+      placeholderFontSize = 14,
+      activeColor = 'blue',
+      inactiveColor = 'black',
+    } = props;
 
     // animation vars
     const inputRef = useRef<TextInput>(null);
@@ -57,6 +64,19 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           scale: interpolate(textTranslation.value, [0, -20], [1, 0.85]),
         },
       ],
+      color: interpolateColor(
+        textTranslation.value,
+        [0, -20],
+        [inactiveColor, activeColor]
+      ),
+    }));
+
+    const animatedContainerStyle = useAnimatedStyle(() => ({
+      borderColor: interpolateColor(
+        textTranslation.value,
+        [0, -20],
+        [inactiveColor, activeColor]
+      ),
     }));
 
     useImperativeHandle(ref, () => ({
@@ -83,13 +103,13 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         top: 12,
         left: 6,
         backgroundColor: '#fff',
-        paddingHorizontal: 10,
-        fontSize: 14,
+        paddingHorizontal: 7,
+        fontSize: placeholderFontSize,
       },
     });
 
     return (
-      <Animated.View style={styles.container}>
+      <Animated.View style={[styles.container, animatedContainerStyle]}>
         <TouchableWithoutFeedback onPress={handleFocus}>
           <View style={styles.inputContainer}>
             <TextInput
@@ -101,7 +121,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           </View>
         </TouchableWithoutFeedback>
         <Animated.Text style={[styles.placeholder, animatedPlaceholderStyles]}>
-          Placeholder
+          {placeholder}
         </Animated.Text>
       </Animated.View>
     );
