@@ -25,16 +25,16 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 
 ### Props
 
-| Prop                | Desription                                                                                                                                                                                              | Default   | Type     |
-| ------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | -------- |
-| `placeholder`       | Placeholder for the `textinput`.                                                                                                                                                                        |           | `string` |
-| `fontSize`          | Font size for TextInput.                                                                                                                                                                                | `14`      | `number` |
-| `paddingVertical`   | Vertical padding for TextInput Container. Used to calculate animations.                                                                                                                                 | `12`      | `number` |
+|                Prop | Desription                                                                                                                                                                                              | Default   | Type     |
+| ------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | -------- |
+|       `placeholder` | Placeholder for the `textinput`.                                                                                                                                                                        |           | `string` |
+|          `fontSize` | Font size for TextInput.                                                                                                                                                                                | `14`      | `number` |
+|   `paddingVertical` | Vertical padding for TextInput Container. Used to calculate animations.                                                                                                                                 | `12`      | `number` |
 | `paddingHorizontal` | Horizontal padding for TextInput Container.                                                                                                                                                             | `16`      | `number` |
-| `activeColor`       | Color when focused.                                                                                                                                                                                     | `'blue'`  | `string` |
-| `inactiveColor`     | Color when blurred (not focused).                                                                                                                                                                       | `'black'` | `string` |
-| `errorColor`        | Color that is displayed when in error state.                                                                                                                                                            | `'red'`   | `string` |
-| `error`             | Error message to be displayed. If anything is provided to error besided null or undefined, then the component is within an error state, thus displaying the error message provided here and errorColor. | `'red'`   | `string` |
+|       `activeColor` | Color when focused.                                                                                                                                                                                     | `'blue'`  | `string` |
+|     `inactiveColor` | Color when blurred (not focused).                                                                                                                                                                       | `'black'` | `string` |
+|        `errorColor` | Color that is displayed when in error state.                                                                                                                                                            | `'red'`   | `string` |
+|             `error` | Error message to be displayed. If anything is provided to error besided null or undefined, then the component is within an error state, thus displaying the error message provided here and errorColor. | `'red'`   | `string` |
 
 ## Contributing
 
