@@ -25,8 +25,8 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 
 ### Props
 
-| Prop          | Required                 | Default | Type     |
-| ------------- | ------------------------ | ------- | -------- |
+| Prop          |         Required         | Default | Type     |
+| ------------- | :----------------------: | ------- | -------- |
 | `placeholder` | <ul><li>- [x] </li></ul> |         | `string` |
 |               | <ul><li>- [x] </li></ul> |         |          |
 |               | <ul><li>- [x] </li></ul> |         |          |
