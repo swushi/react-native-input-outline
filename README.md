@@ -25,11 +25,11 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 
 ### Props
 
-| Prop          | Required                     | Default | Type     |
-| ------------- | ---------------------------- | ------- | -------- |
-| `placeholder` | <ul><li>- [x] item1</li><li> |         | `string` |
-|               | <ul><li>- [x] item1</li><li> |         |          |
-|               | <ul><li>- [x] item1</li><li> |         |          |
+| Prop          | Required                | Default | Type     |
+| ------------- | ----------------------- | ------- | -------- |
+| `placeholder` | <ul><li>- [x]</li></ul> |         | `string` |
+|               | <ul><li>- [x]</li></ul> |         |          |
+|               | <ul><li>- [x]</li></ul> |         |          |
 
 ## Contributing
 
