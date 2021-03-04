@@ -25,7 +25,11 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 
 ### Props
 
-All props will be shown here.
+| Prop          | Required | Default | Type     |
+| ------------- | -------- | ------- | -------- |
+| `placeholder` | [ ]      |         | `string` |
+|               | [ ]      |         |          |
+|               | [ ]      |         |          |
 
 ## Contributing
 
