@@ -1,4 +1,9 @@
-import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+import React, {
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+  useEffect,
+} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -33,11 +38,23 @@ export interface InputOutlineProps extends TextInputProps {
    */
   placeholder?: string;
   /**
-   * Placeholder font size.
+   * Font size for TextInput.
    * @default 14
    * @type number
    */
-  placeholderFontSize?: number;
+  fontSize?: number;
+  /**
+   * Vertical padding for TextInput Container. Used to calculate animations.
+   * @default 12
+   * @type number
+   */
+  paddingVertical?: number;
+  /**
+   * Vertical padding for TextInput Container.
+   * @default 16
+   * @type number
+   */
+  paddingHorizontal?: number;
   /**
    * Color when focused.
    * @default blue
@@ -50,6 +67,19 @@ export interface InputOutlineProps extends TextInputProps {
    * @type string
    */
   inactiveColor?: string;
+  /**
+   * Error message is displayed. If anything is provided to error besides null or undefined, then the component is
+   * within an error state, thus displaying the error message provided here and errorColor.
+   * @default undefined
+   * @type string
+   */
+  error?: string;
+  /**
+   * Color that is displayed when in error state.
+   * @default red
+   * @type string
+   */
+  errorColor?: string;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -57,47 +87,75 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     // establish provided props
     const {
       placeholder = 'Placeholder',
-      placeholderFontSize = 14,
+      fontSize = 14,
       activeColor = 'blue',
       inactiveColor = 'black',
+      paddingVertical = 12,
+      paddingHorizontal = 16,
+      errorColor = 'red',
+      error,
       ...inputProps
     } = props;
 
     // animation vars
     const inputRef = useRef<TextInput>(null);
-    const textTranslation = useSharedValue(0);
+    const anim = useSharedValue(0);
+    const colorMap = useSharedValue(0);
+
+    // helper functinos
+    const focus = () => inputRef.current?.focus();
+    const blur = () => inputRef.current?.blur();
+    const isFocused = () => inputRef.current?.isFocused;
 
     const handleFocus = () => {
-      textTranslation.value = withTiming(-20);
-      inputRef.current?.focus();
+      anim.value = withTiming(1); // focused
+      colorMap.value = withTiming(1); // active
+      focus();
     };
 
     const handleBlur = () => {
-      textTranslation.value = withTiming(0);
-      inputRef.current?.blur();
+      anim.value = withTiming(0); // blur
+      colorMap.value = withTiming(0); // inactive
+      blur();
     };
+
+    // error handling
+    useEffect(() => {
+      if (error) {
+        colorMap.value = withTiming(2); // error
+      } else {
+        colorMap.value = withTiming(isFocused() ? 1 : 0); // to active or inactive color if focused
+      }
+    }, [error, colorMap]);
 
     const animatedPlaceholderStyles = useAnimatedStyle(() => ({
       transform: [
         {
-          translateY: textTranslation.value,
+          translateY: interpolate(
+            anim.value,
+            [0, 1],
+            [0, -(paddingVertical + fontSize * 0.7)]
+          ),
         },
         {
-          scale: interpolate(textTranslation.value, [0, -20], [1, 0.85]),
+          scale: interpolate(anim.value, [0, 1], [1, 0.7]),
+        },
+        {
+          translateX: interpolate(anim.value, [0, 1], [0, -paddingHorizontal]),
         },
       ],
       color: interpolateColor(
-        textTranslation.value,
-        [0, -20],
-        [inactiveColor, activeColor]
+        colorMap.value,
+        [0, 1, 2],
+        [inactiveColor, activeColor, errorColor]
       ),
     }));
 
     const animatedContainerStyle = useAnimatedStyle(() => ({
       borderColor: interpolateColor(
-        textTranslation.value,
-        [0, -20],
-        [inactiveColor, activeColor]
+        colorMap.value,
+        [0, 1, 2],
+        [inactiveColor, activeColor, errorColor]
       ),
     }));
 
@@ -116,17 +174,20 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       inputContainer: {
         flex: 1,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
+        paddingVertical,
+        paddingHorizontal,
         justifyContent: 'center',
+      },
+      input: {
+        fontSize,
       },
       placeholder: {
         position: 'absolute',
-        top: 12,
-        left: 6,
+        top: paddingVertical,
+        left: paddingHorizontal - 7,
         backgroundColor: '#fff',
         paddingHorizontal: 7,
-        fontSize: placeholderFontSize,
+        fontSize: fontSize,
       },
     });
 
@@ -136,9 +197,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           <View style={styles.inputContainer}>
             <TextInput
               ref={inputRef}
+              style={styles.input}
               pointerEvents="none"
               onFocus={handleFocus}
               onSubmitEditing={handleBlur}
+              selectionColor={error ? errorColor : activeColor}
               {...inputProps}
             />
           </View>
