@@ -26,20 +26,21 @@ export default function App() {
     setError(undefined);
   };
 
+  const clear = () => {
+    // @ts-ignore
+    inputRef.current?.clear();
+  };
+
   return (
     <View style={styles.container}>
       <InputOutline
+        inactiveColor={'#fff'}
         ref={inputRef}
         error={error}
         onChangeText={setValue}
         value={value}
         trailingIcon={() => (
-          <Ionicons
-            name="eye"
-            color={'blue'}
-            size={20}
-            onPress={() => console.log('eye')}
-          />
+          <Ionicons name="close" color={'#000'} size={20} onPress={clear} />
         )}
       />
       <Button onPress={focus} title="Focus" />
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     marginTop: 200,
+    backgroundColor: 'black',
   },
   box: {
     width: 60,

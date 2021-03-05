@@ -19,6 +19,7 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   interpolateColor,
+  Extrapolate,
 } from 'react-native-reanimated';
 
 export interface InputOutlineMethods {
@@ -34,6 +35,10 @@ export interface InputOutlineMethods {
    * Returns current focus of input.
    */
   isFocused: Boolean;
+  /**
+   * Removes all text from the TextInput.
+   */
+  clear: () => void;
 }
 
 export interface InputOutlineProps extends TextInputProps {
@@ -88,8 +93,16 @@ export interface InputOutlineProps extends TextInputProps {
   errorColor?: string;
   /**
    * Trailing Icon for the TextInput.
+   * @default none
+   * @type React.FC
    */
   trailingIcon?: React.FC;
+  /**
+   * Border radius applied to container.
+   * @default 5
+   * @type number
+   */
+  roundness?: number;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -103,6 +116,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       paddingVertical = 12,
       paddingHorizontal = 16,
       errorColor = 'red',
+      roundness = 5,
       trailingIcon,
       error,
       onChangeText,
@@ -113,22 +127,24 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
 
     // animation vars
     const inputRef = useRef<TextInput>(null);
-    const labelMap = useSharedValue(0);
+    const placeholderMap = useSharedValue(0);
+    const placeholderSize = useSharedValue(0);
     const colorMap = useSharedValue(0);
 
     // helper functinos
     const focus = () => inputRef.current?.focus();
     const blur = () => inputRef.current?.blur();
     const isFocused = () => Boolean(inputRef.current?.isFocused());
+    const clear = () => Boolean(inputRef.current?.clear());
 
     const handleFocus = () => {
-      labelMap.value = withTiming(1); // focused
+      placeholderMap.value = withTiming(1); // focused
       if (!error) colorMap.value = withTiming(1); // active
       focus();
     };
 
     const handleBlur = () => {
-      if (!value) labelMap.value = withTiming(0); // blur
+      if (!value) placeholderMap.value = withTiming(0); // blur
       if (!error) colorMap.value = withTiming(0); // inactive
       blur();
     };
@@ -137,6 +153,14 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       onChangeText && onChangeText(text);
       setValue(text);
     };
+
+    const handlePlaceholderLayout = useCallback(
+      ({ nativeEvent }) => {
+        const { width } = nativeEvent.layout;
+        placeholderSize.value = width;
+      },
+      [placeholderSize]
+    );
 
     const renderTrailingIcon = useCallback(() => {
       if (trailingIcon) return trailingIcon({});
@@ -156,19 +180,19 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       transform: [
         {
           translateY: interpolate(
-            labelMap.value,
+            placeholderMap.value,
             [0, 1],
             [0, -(paddingVertical + fontSize * 0.7)]
           ),
         },
         {
-          scale: interpolate(labelMap.value, [0, 1], [1, 0.7]),
+          scale: interpolate(placeholderMap.value, [0, 1], [1, 0.7]),
         },
         {
           translateX: interpolate(
-            labelMap.value,
+            placeholderMap.value,
             [0, 1],
-            [0, -paddingHorizontal]
+            [0, -placeholderSize.value * 0.2]
           ),
         },
       ],
@@ -176,6 +200,15 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         colorMap.value,
         [0, 1, 2],
         [inactiveColor, activeColor, errorColor]
+      ),
+    }));
+
+    const animatedPlaceholderSpacerStyles = useAnimatedStyle(() => ({
+      width: interpolate(
+        placeholderMap.value,
+        [0, 0.5],
+        [0, placeholderSize.value * 0.7 + 5],
+        Extrapolate.CLAMP
       ),
     }));
 
@@ -191,13 +224,14 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       focus: handleFocus,
       blur: handleBlur,
       isFocused: isFocused(),
+      clear: clear,
     }));
 
     const styles = StyleSheet.create({
       container: {
         borderWidth: 1,
         borderColor: 'grey',
-        borderRadius: 12,
+        borderRadius: roundness,
         alignSelf: 'stretch',
         flexDirection: 'row',
         paddingVertical,
@@ -215,10 +249,15 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       placeholder: {
         position: 'absolute',
         top: paddingVertical,
-        left: paddingHorizontal - 7,
-        backgroundColor: '#fff',
-        paddingHorizontal: 7,
+        left: paddingHorizontal,
         fontSize: fontSize,
+      },
+      placeholderSpacer: {
+        position: 'absolute',
+        top: -1,
+        left: paddingHorizontal - 3,
+        backgroundColor: 'black',
+        height: 1,
       },
       errorText: {
         color: errorColor,
@@ -253,7 +292,13 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         {trailingIcon && (
           <View style={styles.trailingIcon}>{renderTrailingIcon()}</View>
         )}
-        <Animated.Text style={[styles.placeholder, animatedPlaceholderStyles]}>
+        <Animated.View
+          style={[styles.placeholderSpacer, animatedPlaceholderSpacerStyles]}
+        />
+        <Animated.Text
+          style={[styles.placeholder, animatedPlaceholderStyles]}
+          onLayout={handlePlaceholderLayout}
+        >
           {placeholder}
         </Animated.Text>
         <Animated.Text style={[styles.errorText]}>{error}</Animated.Text>
