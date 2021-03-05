@@ -79,6 +79,12 @@ export interface InputOutlineProps extends TextInputProps {
    */
   inactiveColor?: string;
   /**
+   * Background color of the InputOutline.
+   * @default 'white'
+   * @type string
+   */
+  backgroundColor?: string;
+  /**
    * Error message is displayed. If anything is provided to error besides null or undefined, then the component is
    * within an error state, thus displaying the error message provided here and errorColor.
    * @default undefined
@@ -116,6 +122,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       paddingVertical = 12,
       paddingHorizontal = 16,
       errorColor = 'red',
+      backgroundColor = 'white',
       roundness = 5,
       trailingIcon,
       error,
@@ -236,6 +243,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         flexDirection: 'row',
         paddingVertical,
         paddingHorizontal,
+        backgroundColor,
       },
       inputContainer: {
         flex: 1,
@@ -256,7 +264,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         position: 'absolute',
         top: -1,
         left: paddingHorizontal - 3,
-        backgroundColor: 'black',
+        backgroundColor,
         height: 1,
       },
       errorText: {

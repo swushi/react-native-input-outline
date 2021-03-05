@@ -34,11 +34,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <InputOutline
-        inactiveColor={'#fff'}
         ref={inputRef}
         error={error}
         onChangeText={setValue}
+        placeholder="Password"
         value={value}
+        style={styles.input}
+        backgroundColor="#000"
+        inactiveColor="#fff"
         trailingIcon={() => (
           <Ionicons name="close" color={'#000'} size={20} onPress={clear} />
         )}
@@ -56,12 +59,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 12,
-    marginTop: 200,
-    backgroundColor: 'black',
+    paddingTop: 200,
+    backgroundColor: '#000',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  input: {
+    color: '#fff',
   },
 });
