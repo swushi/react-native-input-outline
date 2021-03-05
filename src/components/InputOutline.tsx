@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useEffect,
+  useState,
 } from 'react';
 import {
   StyleSheet,
@@ -94,29 +95,37 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       paddingHorizontal = 16,
       errorColor = 'red',
       error,
+      onChangeText,
       ...inputProps
     } = props;
+    // value
+    const [value, setValue] = useState('');
 
     // animation vars
     const inputRef = useRef<TextInput>(null);
-    const anim = useSharedValue(0);
+    const labelMap = useSharedValue(0);
     const colorMap = useSharedValue(0);
 
     // helper functinos
     const focus = () => inputRef.current?.focus();
     const blur = () => inputRef.current?.blur();
-    const isFocused = () => inputRef.current?.isFocused;
+    const isFocused = () => inputRef.current?.isFocused();
 
     const handleFocus = () => {
-      anim.value = withTiming(1); // focused
+      labelMap.value = withTiming(1); // focused
       colorMap.value = withTiming(1); // active
       focus();
     };
 
     const handleBlur = () => {
-      anim.value = withTiming(0); // blur
+      if (!value) labelMap.value = withTiming(0); // blur
       colorMap.value = withTiming(0); // inactive
       blur();
+    };
+
+    const handleChangeText = (text: string) => {
+      onChangeText && onChangeText(text);
+      setValue(text);
     };
 
     // error handling
@@ -132,16 +141,20 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       transform: [
         {
           translateY: interpolate(
-            anim.value,
+            labelMap.value,
             [0, 1],
             [0, -(paddingVertical + fontSize * 0.7)]
           ),
         },
         {
-          scale: interpolate(anim.value, [0, 1], [1, 0.7]),
+          scale: interpolate(labelMap.value, [0, 1], [1, 0.7]),
         },
         {
-          translateX: interpolate(anim.value, [0, 1], [0, -paddingHorizontal]),
+          translateX: interpolate(
+            labelMap.value,
+            [0, 1],
+            [0, -paddingHorizontal]
+          ),
         },
       ],
       color: interpolateColor(
@@ -201,6 +214,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               pointerEvents="none"
               onFocus={handleFocus}
               onSubmitEditing={handleBlur}
+              onChangeText={handleChangeText}
               selectionColor={error ? errorColor : activeColor}
               {...inputProps}
             />

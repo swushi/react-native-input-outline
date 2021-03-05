@@ -6,6 +6,7 @@ import { InputOutline } from 'react-native-input-outline';
 export default function App() {
   const inputRef = React.useRef(null);
   const [error, setError] = React.useState<string | undefined>(undefined);
+  const [value, setValue] = React.useState('');
 
   const focus = () => {
     // @ts-ignore
@@ -17,15 +18,25 @@ export default function App() {
     inputRef.current?.blur();
   };
 
+  const causeError = () => {
+    setError('Error Message');
+  };
+
   const clearError = () => {
     setError(undefined);
   };
 
   return (
     <View style={styles.container}>
-      <InputOutline ref={inputRef} error={error} onChangeText={setError} />
+      <InputOutline
+        ref={inputRef}
+        error={error}
+        onChangeText={setValue}
+        value={value}
+      />
       <Button onPress={focus} title="Focus" />
       <Button onPress={blur} title="Blur" />
+      <Button onPress={causeError} title="Cause Error" />
       <Button onPress={clearError} title="Clear Error" />
     </View>
   );
