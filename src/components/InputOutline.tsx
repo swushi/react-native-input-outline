@@ -29,6 +29,10 @@ export interface InputOutlineMethods {
    * Removes focus from an input or view. This is the opposite of focus()
    */
   blur: () => void;
+  /**
+   * Returns current focus of input.
+   */
+  isFocused: Boolean;
 }
 
 export interface InputOutlineProps extends TextInputProps {
@@ -109,11 +113,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     // helper functinos
     const focus = () => inputRef.current?.focus();
     const blur = () => inputRef.current?.blur();
-    const isFocused = () => inputRef.current?.isFocused();
+    const isFocused = () => Boolean(inputRef.current?.isFocused());
 
     const handleFocus = () => {
       labelMap.value = withTiming(1); // focused
-      colorMap.value = withTiming(1); // active
+      if (!error) colorMap.value = withTiming(1); // active
       focus();
     };
 
@@ -131,7 +135,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     // error handling
     useEffect(() => {
       if (error) {
-        colorMap.value = withTiming(2); // error
+        colorMap.value = 2; // error -- no animation here, snap to color immediately
       } else {
         colorMap.value = withTiming(isFocused() ? 1 : 0); // to active or inactive color if focused
       }
@@ -175,6 +179,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     useImperativeHandle(ref, () => ({
       focus: handleFocus,
       blur: handleBlur,
+      isFocused: isFocused(),
     }));
 
     const styles = StyleSheet.create({
@@ -202,6 +207,13 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         paddingHorizontal: 7,
         fontSize: fontSize,
       },
+      errorText: {
+        color: errorColor,
+        position: 'absolute',
+        fontSize: 10,
+        bottom: -15,
+        left: paddingHorizontal,
+      },
     });
 
     return (
@@ -223,6 +235,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         <Animated.Text style={[styles.placeholder, animatedPlaceholderStyles]}>
           {placeholder}
         </Animated.Text>
+        <Animated.Text style={[styles.errorText]}>{error}</Animated.Text>
       </Animated.View>
     );
   }

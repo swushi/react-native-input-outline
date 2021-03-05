@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 12,
+    marginTop: 200,
   },
   box: {
     width: 60,
