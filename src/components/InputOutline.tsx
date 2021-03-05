@@ -89,7 +89,7 @@ export interface InputOutlineProps extends TextInputProps {
   /**
    * Trailing Icon for the TextInput.
    */
-  trailingIcon?: React.FC | null;
+  trailingIcon?: React.FC;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -129,7 +129,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
 
     const handleBlur = () => {
       if (!value) labelMap.value = withTiming(0); // blur
-      colorMap.value = withTiming(0); // inactive
+      if (!error) colorMap.value = withTiming(0); // inactive
       blur();
     };
 
