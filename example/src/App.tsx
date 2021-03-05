@@ -33,7 +33,14 @@ export default function App() {
         error={error}
         onChangeText={setValue}
         value={value}
-        trailingIcon={() => <Ionicons name="eye" color={'black'} size={20} />}
+        trailingIcon={() => (
+          <Ionicons
+            name="eye"
+            color={'blue'}
+            size={20}
+            onPress={() => console.log('eye')}
+          />
+        )}
       />
       <Button onPress={focus} title="Focus" />
       <Button onPress={blur} title="Blur" />

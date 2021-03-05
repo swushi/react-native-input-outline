@@ -4,7 +4,7 @@ import React, {
   useImperativeHandle,
   useEffect,
   useState,
-  ReactNode,
+  useCallback,
 } from 'react';
 import {
   StyleSheet,
@@ -89,7 +89,7 @@ export interface InputOutlineProps extends TextInputProps {
   /**
    * Trailing Icon for the TextInput.
    */
-  trailingIcon?: Function;
+  trailingIcon?: React.FC | null;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -137,6 +137,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       onChangeText && onChangeText(text);
       setValue(text);
     };
+
+    const renderTrailingIcon = useCallback(() => {
+      if (trailingIcon) return trailingIcon({});
+      return null;
+    }, [trailingIcon]);
 
     // error handling
     useEffect(() => {
@@ -195,12 +200,12 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         borderRadius: 12,
         alignSelf: 'stretch',
         flexDirection: 'row',
+        paddingVertical,
+        paddingHorizontal,
       },
       inputContainer: {
         flex: 1,
         flexDirection: 'row',
-        paddingVertical,
-        paddingHorizontal,
         justifyContent: 'space-between',
         alignItems: 'center',
       },
@@ -224,7 +229,8 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       trailingIcon: {
         position: 'absolute',
-        marginVertical: -paddingVertical,
+        right: paddingHorizontal,
+        alignSelf: 'center',
       },
     });
 
@@ -242,14 +248,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               selectionColor={error ? errorColor : activeColor}
               {...inputProps}
             />
-            <TouchableWithoutFeedback
-              onPress={() => console.log('pressed eye')}
-              style={styles.trailingIcon}
-            >
-              {trailingIcon()}
-            </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
+        {trailingIcon && (
+          <View style={styles.trailingIcon}>{renderTrailingIcon()}</View>
+        )}
         <Animated.Text style={[styles.placeholder, animatedPlaceholderStyles]}>
           {placeholder}
         </Animated.Text>
