@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   useEffect,
   useState,
+  ReactNode,
 } from 'react';
 import {
   StyleSheet,
@@ -85,6 +86,10 @@ export interface InputOutlineProps extends TextInputProps {
    * @type string
    */
   errorColor?: string;
+  /**
+   * Trailing Icon for the TextInput.
+   */
+  trailingIcon?: Function;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -98,6 +103,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       paddingVertical = 12,
       paddingHorizontal = 16,
       errorColor = 'red',
+      trailingIcon,
       error,
       onChangeText,
       ...inputProps
@@ -192,9 +198,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       inputContainer: {
         flex: 1,
+        flexDirection: 'row',
         paddingVertical,
         paddingHorizontal,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        alignItems: 'center',
       },
       input: {
         fontSize,
@@ -214,6 +222,10 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         bottom: -15,
         left: paddingHorizontal,
       },
+      trailingIcon: {
+        position: 'absolute',
+        marginVertical: -paddingVertical,
+      },
     });
 
     return (
@@ -230,6 +242,12 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               selectionColor={error ? errorColor : activeColor}
               {...inputProps}
             />
+            <TouchableWithoutFeedback
+              onPress={() => console.log('pressed eye')}
+              style={styles.trailingIcon}
+            >
+              {trailingIcon()}
+            </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
         <Animated.Text style={[styles.placeholder, animatedPlaceholderStyles]}>

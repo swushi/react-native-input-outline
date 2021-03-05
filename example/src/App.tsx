@@ -1,6 +1,6 @@
 import * as React from 'react';
-
 import { Button, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { InputOutline } from 'react-native-input-outline';
 
 export default function App() {
@@ -33,6 +33,7 @@ export default function App() {
         error={error}
         onChangeText={setValue}
         value={value}
+        trailingIcon={() => <Ionicons name="eye" color={'black'} size={20} />}
       />
       <Button onPress={focus} title="Focus" />
       <Button onPress={blur} title="Blur" />
