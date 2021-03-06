@@ -40,8 +40,6 @@ export default function App() {
         placeholder="Password"
         value={value}
         style={styles.input}
-        backgroundColor="#000"
-        inactiveColor="#fff"
         trailingIcon={() => (
           <Ionicons name="close" color={'#000'} size={20} onPress={clear} />
         )}
@@ -60,7 +58,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     paddingTop: 200,
-    backgroundColor: '#000',
   },
   input: {
     color: '#fff',
