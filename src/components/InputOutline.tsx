@@ -18,8 +18,8 @@ import Animated, {
   withTiming,
   useAnimatedStyle,
   interpolate,
-  interpolateColor,
   Extrapolate,
+  interpolateColor,
 } from 'react-native-reanimated';
 
 export interface InputOutlineMethods {
@@ -118,7 +118,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       placeholder = 'Placeholder',
       fontSize = 14,
       activeColor = 'blue',
-      inactiveColor = 'black',
+      inactiveColor = 'grey',
       paddingVertical = 12,
       paddingHorizontal = 16,
       errorColor = 'red',
@@ -126,10 +126,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       roundness = 5,
       trailingIcon,
       error,
+      style,
       onChangeText,
       ...inputProps
     } = props;
-    // value
+    // value of input
     const [value, setValue] = useState('');
 
     // animation vars
@@ -203,11 +204,11 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           ),
         },
       ],
-      color: interpolateColor(
-        colorMap.value,
-        [0, 1, 2],
-        [inactiveColor, activeColor, errorColor]
-      ),
+      // color: interpolateColor(
+      //   colorMap.value,
+      //   [0, 1, 2],
+      //   [inactiveColor, activeColor, errorColor]
+      // ),
     }));
 
     const animatedPlaceholderSpacerStyles = useAnimatedStyle(() => ({
@@ -237,7 +238,6 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     const styles = StyleSheet.create({
       container: {
         borderWidth: 1,
-        borderColor: 'grey',
         borderRadius: roundness,
         alignSelf: 'stretch',
         flexDirection: 'row',
@@ -268,7 +268,6 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         height: 1,
       },
       errorText: {
-        color: errorColor,
         position: 'absolute',
         fontSize: 10,
         bottom: -15,
@@ -282,18 +281,18 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     });
 
     return (
-      <Animated.View style={[styles.container, animatedContainerStyle]}>
+      <Animated.View style={[styles.container, animatedContainerStyle, style]}>
         <TouchableWithoutFeedback onPress={handleFocus}>
           <View style={styles.inputContainer}>
             <TextInput
+              {...inputProps}
               ref={inputRef}
               style={styles.input}
               pointerEvents="none"
               onFocus={handleFocus}
-              onSubmitEditing={handleBlur}
+              onBlur={handleBlur}
               onChangeText={handleChangeText}
               selectionColor={error ? errorColor : activeColor}
-              {...inputProps}
             />
           </View>
         </TouchableWithoutFeedback>
