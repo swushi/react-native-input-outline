@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-outline",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Performant React Native Text Inputs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -64,6 +64,7 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^",
+    "react-native-gesture-handler": "1.8.0",
     "react-native-reanimated": "2.0.0-rc.0",
     "release-it": "^14.2.2",
     "typescript": "^4.1.3"
