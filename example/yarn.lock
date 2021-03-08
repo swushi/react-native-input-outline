@@ -1497,6 +1497,11 @@
     xcode "^2.1.0"
     xmldom "0.1.27"
 
+"@gorhom/showcase-template@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@gorhom/showcase-template/-/showcase-template-1.0.2.tgz#4dfefde1a2e05d28ac6420827d576ababb133272"
+  integrity sha512-D0mV9qsncJdwXfkkwE1eWpEANxMEFe8jwhVXJK7z6wJ1S3we3WXwzFleOc2Xl4tnwpcLOi6ijoowedwIPTjb1A==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

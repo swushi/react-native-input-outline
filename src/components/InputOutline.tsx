@@ -76,6 +76,12 @@ export interface InputOutlineProps extends TextInputProps {
    */
   activeColor?: string;
   /**
+   * Color of TextInput font.
+   * @default 'black'
+   * @type string
+   */
+  fontColor?: string;
+  /**
    * Color when blurred (not focused).
    * @default 'grey'
    * @type string
@@ -120,6 +126,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     const {
       placeholder = 'Placeholder',
       fontSize = 14,
+      fontColor = 'black',
       activeColor = 'blue',
       inactiveColor = 'grey',
       paddingVertical = 12,
@@ -262,6 +269,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       input: {
         fontSize,
+        color: fontColor,
       },
       placeholder: {
         position: 'absolute',

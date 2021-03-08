@@ -5,20 +5,17 @@ import { InputOutline } from 'react-native-input-outline';
 
 interface Props {}
 
-const primary = 'blue';
+const primary = 'lightblue';
+const lightBackground = '#e4e4e4';
+const darkBackground = '#1e1e1e';
+// const lightForeground = '#fff';
+const darkForeground = '#2b2b2b';
 
 const Showcase = ({}: Props) => {
   const [error1, setError1] = useState<string | undefined>(undefined);
-  const [error2, setError2] = useState<string | undefined>(undefined);
-  const [isHiddenPass, setIsHiddenPass] = useState(true);
 
   const handlePress = () => {
     setError1('Invalid Email Address');
-    setError2('Password must contain at least 1 digit');
-  };
-
-  const handleHiddenPress = () => {
-    setIsHiddenPass(!isHiddenPass);
   };
 
   return (
@@ -27,40 +24,38 @@ const Showcase = ({}: Props) => {
         <Text style={styles.label}>Personal Information</Text>
         <InputOutline
           activeColor={primary}
+          inactiveColor={lightBackground}
           style={styles.input}
           placeholder="First name"
           autoCorrect={false}
+          keyboardAppearance="dark"
+          backgroundColor={darkForeground}
+          fontColor={lightBackground}
         />
         <InputOutline
           activeColor={primary}
+          inactiveColor={lightBackground}
           style={styles.input}
           placeholder="Last name"
           autoCorrect={false}
+          keyboardAppearance="dark"
+          fontColor={lightBackground}
+          backgroundColor={darkForeground}
         />
         <InputOutline
           activeColor={primary}
+          inactiveColor={lightBackground}
           style={styles.input}
           placeholder="Email"
           textContentType="oneTimeCode"
           autoCorrect={false}
+          backgroundColor={darkForeground}
+          fontColor={lightBackground}
+          keyboardAppearance="dark"
           error={error1}
-        />
-        <InputOutline
-          activeColor={primary}
-          autoCorrect={false}
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={isHiddenPass}
-          textContentType="oneTimeCode"
           trailingIcon={() => (
-            <Ionicons
-              name={isHiddenPass ? 'eye' : 'eye-off'}
-              color="#000"
-              size={20}
-              onPress={handleHiddenPress}
-            />
+            <Ionicons name="mail" size={25} color={lightBackground} />
           )}
-          error={error2}
         />
         <TouchableOpacity style={styles.button} onPress={handlePress}>
           <Text style={styles.buttonText}>Save Information</Text>
@@ -73,13 +68,14 @@ const Showcase = ({}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 8,
     paddingTop: 75,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: darkBackground,
   },
   card: {
-    height: 500,
+    height: 400,
     borderRadius: 12,
-    backgroundColor: '#fff',
+    backgroundColor: darkForeground,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: {
