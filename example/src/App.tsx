@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 12,
-    paddingTop: 200,
+    backgroundColor: '#f3f3f3',
   },
   input: {
     color: '#fff',
