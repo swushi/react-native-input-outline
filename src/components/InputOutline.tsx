@@ -68,13 +68,13 @@ export interface InputOutlineProps extends TextInputProps {
   paddingHorizontal?: number;
   /**
    * Color when focused.
-   * @default blue
+   * @default 'blue'
    * @type string
    */
   activeColor?: string;
   /**
    * Color when blurred (not focused).
-   * @default black
+   * @default 'grey'
    * @type string
    */
   inactiveColor?: string;
@@ -93,7 +93,7 @@ export interface InputOutlineProps extends TextInputProps {
   error?: string;
   /**
    * Color that is displayed when in error state.
-   * @default red
+   * @default 'red'
    * @type string
    */
   errorColor?: string;
@@ -143,7 +143,10 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     const focus = () => inputRef.current?.focus();
     const blur = () => inputRef.current?.blur();
     const isFocused = () => Boolean(inputRef.current?.isFocused());
-    const clear = () => Boolean(inputRef.current?.clear());
+    const clear = () => {
+      Boolean(inputRef.current?.clear());
+      setValue('');
+    };
 
     const handleFocus = () => {
       placeholderMap.value = withTiming(1); // focused
@@ -180,7 +183,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       if (error) {
         colorMap.value = 2; // error -- no animation here, snap to color immediately
       } else {
-        colorMap.value = withTiming(isFocused() ? 1 : 0); // to active or inactive color if focused
+        colorMap.value = isFocused() ? 1 : 0; // to active or inactive color if focused
       }
     }, [error, colorMap]);
 
@@ -204,28 +207,31 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           ),
         },
       ],
-      // color: interpolateColor(
-      //   colorMap.value,
-      //   [0, 1, 2],
-      //   [inactiveColor, activeColor, errorColor]
-      // ),
+      color: interpolateColor(
+        colorMap.value,
+        [0, 1, 2],
+        [inactiveColor, activeColor, errorColor]
+      ),
     }));
 
     const animatedPlaceholderSpacerStyles = useAnimatedStyle(() => ({
       width: interpolate(
         placeholderMap.value,
-        [0, 0.5],
+        [0, 1],
         [0, placeholderSize.value * 0.7 + 5],
         Extrapolate.CLAMP
       ),
     }));
 
     const animatedContainerStyle = useAnimatedStyle(() => ({
-      borderColor: interpolateColor(
-        colorMap.value,
-        [0, 1, 2],
-        [inactiveColor, activeColor, errorColor]
-      ),
+      borderColor:
+        placeholderSize.value > 0
+          ? interpolateColor(
+              colorMap.value,
+              [0, 1, 2],
+              [inactiveColor, activeColor, errorColor]
+            )
+          : inactiveColor,
     }));
 
     useImperativeHandle(ref, () => ({
@@ -269,6 +275,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       errorText: {
         position: 'absolute',
+        color: errorColor,
         fontSize: 10,
         bottom: -15,
         left: paddingHorizontal,
