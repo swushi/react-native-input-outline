@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
   useCallback,
+  useMemo,
 } from 'react';
 import {
   StyleSheet,
@@ -12,6 +13,7 @@ import {
   TextInputProps,
   TouchableWithoutFeedback,
   View,
+  LogBox,
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -218,7 +220,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       width: interpolate(
         placeholderMap.value,
         [0, 1],
-        [0, placeholderSize.value * 0.7 + 5],
+        [0, placeholderSize.value * 0.7 + 7],
         Extrapolate.CLAMP
       ),
     }));
@@ -287,6 +289,10 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
     });
 
+    const placeholderStyle = useMemo(() => {
+      return [styles.placeholder, animatedPlaceholderStyles];
+    }, [styles.placeholder, animatedPlaceholderStyles]);
+
     return (
       <Animated.View style={[styles.container, animatedContainerStyle, style]}>
         <TouchableWithoutFeedback onPress={handleFocus}>
@@ -310,7 +316,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           style={[styles.placeholderSpacer, animatedPlaceholderSpacerStyles]}
         />
         <Animated.Text
-          style={[styles.placeholder, animatedPlaceholderStyles]}
+          style={placeholderStyle}
           onLayout={handlePlaceholderLayout}
         >
           {placeholder}
@@ -320,3 +326,6 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     );
   }
 );
+
+// color issue
+LogBox.ignoreLogs(['You are setting the style `{ color: ... }` as a prop.']);

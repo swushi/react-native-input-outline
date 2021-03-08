@@ -1,39 +1,40 @@
 import * as React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { InputOutline } from 'react-native-input-outline';
+import { StyleSheet, View } from 'react-native';
+// import { Ionicons } from '@expo/vector-icons';
+// import { InputOutline } from 'react-native-input-outline';
+import Showcase from './Showcase';
 
 export default function App() {
-  const inputRef = React.useRef(null);
-  const [error, setError] = React.useState<string | undefined>(undefined);
-  const [value, setValue] = React.useState('');
+  // const inputRef = React.useRef(null);
+  // const [error, setError] = React.useState<string | undefined>(undefined);
+  // const [value, setValue] = React.useState('');
 
-  const focus = () => {
-    // @ts-ignore
-    inputRef.current?.focus();
-  };
+  // const focus = () => {
+  //   // @ts-ignore
+  //   inputRef.current?.focus();
+  // };
 
-  const blur = () => {
-    // @ts-ignore
-    inputRef.current?.blur();
-  };
+  // const blur = () => {
+  //   // @ts-ignore
+  //   inputRef.current?.blur();
+  // };
 
-  const causeError = () => {
-    setError('Error Message');
-  };
+  // const causeError = () => {
+  //   setError('Error Message');
+  // };
 
-  const clearError = () => {
-    setError(undefined);
-  };
+  // const clearError = () => {
+  //   setError(undefined);
+  // };
 
-  const clear = () => {
-    // @ts-ignore
-    inputRef.current?.clear();
-  };
+  // const clear = () => {
+  //   // @ts-ignore
+  //   inputRef.current?.clear();
+  // };
 
   return (
     <View style={styles.container}>
-      <InputOutline
+      {/* <InputOutline
         ref={inputRef}
         error={error}
         onChangeText={setValue}
@@ -47,7 +48,8 @@ export default function App() {
       <Button onPress={focus} title="Focus" />
       <Button onPress={blur} title="Blur" />
       <Button onPress={causeError} title="Cause Error" />
-      <Button onPress={clearError} title="Clear Error" />
+      <Button onPress={clearError} title="Clear Error" /> */}
+      <Showcase />
     </View>
   );
 }
