@@ -13,6 +13,7 @@ import {
   TextInputProps,
   TouchableWithoutFeedback,
   View,
+  // @ts-ignore
   LogBox,
 } from 'react-native';
 import Animated, {
