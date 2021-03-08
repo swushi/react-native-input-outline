@@ -18,6 +18,10 @@ const Showcase = ({}: Props) => {
     setError1('Invalid Email Address');
   };
 
+  const clearError = () => {
+    setError1(undefined);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -36,7 +40,8 @@ const Showcase = ({}: Props) => {
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}
-          placeholder="Last name"
+          placeholder="Nickname"
+          characterCount={15}
           autoCorrect={false}
           keyboardAppearance="dark"
           fontColor={lightBackground}
@@ -47,7 +52,9 @@ const Showcase = ({}: Props) => {
           inactiveColor={lightBackground}
           style={styles.input}
           placeholder="Email"
+          characterCount={20}
           textContentType="oneTimeCode"
+          onChangeText={clearError}
           autoCorrect={false}
           backgroundColor={darkForeground}
           fontColor={lightBackground}

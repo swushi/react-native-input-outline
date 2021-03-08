@@ -13,6 +13,7 @@ import {
   TextInputProps,
   TouchableWithoutFeedback,
   View,
+  Text,
   // @ts-ignore
   LogBox,
 } from 'react-native';
@@ -118,6 +119,12 @@ export interface InputOutlineProps extends TextInputProps {
    * @type number
    */
   roundness?: number;
+  /**
+   * Will show a character count helper text and limit the characters being entered.
+   * @default undefined
+   * @type number
+   */
+  characterCount?: number;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -134,6 +141,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       errorColor = 'red',
       backgroundColor = 'white',
       roundness = 5,
+      characterCount,
       trailingIcon,
       error,
       style,
@@ -217,6 +225,9 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
           ),
         },
       ],
+    }));
+
+    const animatedPlaceholderTextStyles = useAnimatedStyle(() => ({
       color: interpolateColor(
         colorMap.value,
         [0, 1, 2],
@@ -275,7 +286,9 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         position: 'absolute',
         top: paddingVertical,
         left: paddingHorizontal,
-        fontSize: fontSize,
+      },
+      placeholderText: {
+        fontSize,
       },
       placeholderSpacer: {
         position: 'absolute',
@@ -296,6 +309,13 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         right: paddingHorizontal,
         alignSelf: 'center',
       },
+      counterText: {
+        position: 'absolute',
+        color: inactiveColor,
+        fontSize: 10,
+        bottom: -15,
+        right: paddingHorizontal,
+      },
     });
 
     const placeholderStyle = useMemo(() => {
@@ -314,6 +334,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChangeText={handleChangeText}
+              maxLength={characterCount ? characterCount : undefined}
               selectionColor={error ? errorColor : activeColor}
             />
           </View>
@@ -324,13 +345,23 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         <Animated.View
           style={[styles.placeholderSpacer, animatedPlaceholderSpacerStyles]}
         />
-        <Animated.Text
+        <Animated.View
           style={placeholderStyle}
           onLayout={handlePlaceholderLayout}
+          pointerEvents="none"
         >
-          {placeholder}
-        </Animated.Text>
-        <Animated.Text style={[styles.errorText]}>{error}</Animated.Text>
+          <Animated.Text
+            style={[styles.placeholderText, animatedPlaceholderTextStyles]}
+          >
+            {placeholder}
+          </Animated.Text>
+        </Animated.View>
+        {characterCount && (
+          <Text
+            style={styles.counterText}
+          >{`${value.length} / ${characterCount}`}</Text>
+        )}
+        <Text style={[styles.errorText]}>{error}</Text>
       </Animated.View>
     );
   }
