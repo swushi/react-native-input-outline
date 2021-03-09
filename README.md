@@ -20,14 +20,32 @@ Reanimated v2 is required for this library to work.
 ## Usage
 
 ```js
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { View, Button } from 'react-native';
 import { InputOutline } from 'react-native-input-outline';
 
 export default () => {
   const inputRef = useRef<InputOutline>(null); // fully TypeScript enabled
+  const [error, setError] = useState<string |undefined>(undefined);
+
+  const showError = () => {
+    setError("This is your error message!")
+  }
+
+  const hideError = () => {
+    setError(undefined)
+  }
 
   return (
-    <InputOutline ref={inputRef} />    // full list of props below!
+    <View>
+
+      <InputOutline 
+        ref={inputRef} 
+        error={error} // wont take effect until a message is passed
+      /> 
+      
+      <Button onPress={showError} title="Set Input Error" />
+    </View>
   );
 }
 ```
