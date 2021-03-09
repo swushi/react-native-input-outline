@@ -37,7 +37,7 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 ### Props
 
 | Prop                | Desription            | Default  | Type|                         
-|--:------------------|--:---------|-----------------------------------------------|-|
+|--:------------------|--:---------|-----------------------------------------------|----|
 | `TextInput Props`   | Inherited Props  |             | [TextInput Props](https://reactnative.dev/docs/textinput#props) |
 | `placeholder`       | The string that will be rendered before text input has been entered.            |             | `string`         |
 
