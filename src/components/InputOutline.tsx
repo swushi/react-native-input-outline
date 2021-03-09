@@ -115,7 +115,7 @@ export interface InputOutlineProps extends TextInputProps {
   errorColor?: string;
   /**
    * Trailing Icon for the TextInput.
-   * @default none
+   * @default undefined
    * @type React.FC
    */
   trailingIcon?: React.FC;
