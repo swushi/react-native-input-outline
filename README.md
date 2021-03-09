@@ -59,7 +59,7 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 ### Methods
 
 | Method        | Description                                                                                                            |
-|--:------------|--:---------------------------------------------------------------------------------------------------------------------|
+|:------------|:---------------------------------------------------------------------------------------------------------------------|
 | `focus()`     | Requests focus for the given input or view. The exact behavior triggered will depend on the platform and type of view. |
 | `blur()`      | Removes focus from an input or view. This is the opposite of focus()                                                   |
 | `isFocused()` | Returns current focus of input.                                                                                        |
