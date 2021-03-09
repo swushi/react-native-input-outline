@@ -15,7 +15,7 @@ const Showcase = ({}: Props) => {
   const [error1, setError1] = useState<string | undefined>(undefined);
 
   const handlePress = () => {
-    setError1('Invalid Email Address');
+    setError1("Yikes! That's a warning!");
   };
 
   const clearError = () => {
@@ -25,25 +25,33 @@ const Showcase = ({}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.label}>Personal Information</Text>
+        <Text style={styles.label}>react-native-input-outline</Text>
         <InputOutline
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}
-          placeholder="First name"
+          placeholder="Customizable"
           autoCorrect={false}
+          fontSize={30}
           keyboardAppearance="dark"
+          autoCapitalize="words"
           backgroundColor={darkForeground}
           fontColor={lightBackground}
+          assistiveText="Well Documented Reusable Component"
         />
         <InputOutline
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}
-          placeholder="Nickname"
-          characterCount={15}
+          placeholder="Fast"
+          fontSize={25}
+          characterCount={14}
+          trailingIcon={() => (
+            <Ionicons name="rocket" size={25} color={lightBackground} />
+          )}
           autoCorrect={false}
           keyboardAppearance="dark"
+          autoCapitalize="words"
           fontColor={lightBackground}
           backgroundColor={darkForeground}
         />
@@ -51,21 +59,50 @@ const Showcase = ({}: Props) => {
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}
-          placeholder="Email"
-          characterCount={20}
+          placeholder="Icon Support"
+          characterCount={25}
           textContentType="oneTimeCode"
           onChangeText={clearError}
           autoCorrect={false}
           backgroundColor={darkForeground}
           fontColor={lightBackground}
           keyboardAppearance="dark"
+          assistiveText="Help your users through confusing Inputs!"
           error={error1}
+          autoCapitalize="words"
           trailingIcon={() => (
-            <Ionicons name="mail" size={25} color={lightBackground} />
+            <Ionicons
+              name="mail"
+              size={20}
+              color={error1 ? 'red' : lightBackground}
+            />
+          )}
+        />
+        <InputOutline
+          activeColor={primary}
+          inactiveColor={lightBackground}
+          style={styles.input}
+          placeholder="TypeScript Enabled"
+          characterCount={5}
+          textContentType="oneTimeCode"
+          onChangeText={clearError}
+          autoCorrect={false}
+          backgroundColor={darkForeground}
+          fontColor={lightBackground}
+          keyboardAppearance="dark"
+          assistiveText="Help your users through confusing Inputs!"
+          error={error1}
+          autoCapitalize="words"
+          trailingIcon={() => (
+            <Ionicons
+              name="terminal"
+              size={20}
+              color={error1 ? 'red' : lightBackground}
+            />
           )}
         />
         <TouchableOpacity style={styles.button} onPress={handlePress}>
-          <Text style={styles.buttonText}>Save Information</Text>
+          <Text style={styles.buttonText}>Let's Get Started!</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -80,7 +117,6 @@ const styles = StyleSheet.create({
     backgroundColor: darkBackground,
   },
   card: {
-    height: 400,
     borderRadius: 12,
     backgroundColor: darkForeground,
     padding: 20,
@@ -98,9 +134,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '500',
   },
-  input: {},
+  input: {
+    marginTop: 30,
+  },
   button: {
-    marginTop: 10,
+    marginTop: 30,
     backgroundColor: primary,
     borderRadius: 5,
     justifyContent: 'center',

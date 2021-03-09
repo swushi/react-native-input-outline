@@ -59,6 +59,18 @@ export interface InputOutlineProps extends TextInputProps {
    */
   fontSize?: number;
   /**
+   * Color of TextInput font.
+   * @default 'black'
+   * @type string
+   */
+  fontColor?: string;
+  /**
+   * Font family for all fonts.
+   * @default undefined
+   * @type string
+   */
+  fontFamily?: string;
+  /**
    * Vertical padding for TextInput Container. Used to calculate animations.
    * @default 12
    * @type number
@@ -76,12 +88,6 @@ export interface InputOutlineProps extends TextInputProps {
    * @type string
    */
   activeColor?: string;
-  /**
-   * Color of TextInput font.
-   * @default 'black'
-   * @type string
-   */
-  fontColor?: string;
   /**
    * Color when blurred (not focused).
    * @default 'grey'
@@ -125,6 +131,12 @@ export interface InputOutlineProps extends TextInputProps {
    * @type number
    */
   characterCount?: number;
+  /**
+   * Helper text that can be displayed to assist users with Inputs. `error` prop will override this.
+   * @default undefined
+   * @type string
+   */
+  assistiveText?: string;
 }
 
 export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
@@ -143,6 +155,8 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       roundness = 5,
       characterCount,
       trailingIcon,
+      assistiveText,
+      fontFamily,
       error,
       style,
       onChangeText,
@@ -280,6 +294,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       input: {
         fontSize,
+        fontFamily,
         color: fontColor,
       },
       placeholder: {
@@ -289,6 +304,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       placeholderText: {
         fontSize,
+        fontFamily,
       },
       placeholderSpacer: {
         position: 'absolute',
@@ -303,6 +319,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
         fontSize: 10,
         bottom: -15,
         left: paddingHorizontal,
+        fontFamily,
       },
       trailingIcon: {
         position: 'absolute',
@@ -311,10 +328,19 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
       },
       counterText: {
         position: 'absolute',
-        color: inactiveColor,
+        color: error ? errorColor : inactiveColor,
         fontSize: 10,
         bottom: -15,
         right: paddingHorizontal,
+        fontFamily,
+      },
+      assistiveText: {
+        position: 'absolute',
+        color: inactiveColor,
+        fontSize: 10,
+        bottom: -15,
+        left: paddingHorizontal,
+        fontFamily,
       },
     });
 
@@ -336,6 +362,7 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
               onChangeText={handleChangeText}
               maxLength={characterCount ? characterCount : undefined}
               selectionColor={error ? errorColor : activeColor}
+              placeholder=""
             />
           </View>
         </TouchableWithoutFeedback>
@@ -361,7 +388,13 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
             style={styles.counterText}
           >{`${value.length} / ${characterCount}`}</Text>
         )}
-        <Text style={[styles.errorText]}>{error}</Text>
+        {error ? (
+          <Text style={[styles.errorText]}>{error}</Text>
+        ) : (
+          assistiveText && (
+            <Text style={[styles.assistiveText]}>{assistiveText}</Text>
+          )
+        )}
       </Animated.View>
     );
   }
