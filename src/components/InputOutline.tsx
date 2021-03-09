@@ -139,7 +139,9 @@ export interface InputOutlineProps extends TextInputProps {
   assistiveText?: string;
 }
 
-export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
+type InputOutline = InputOutlineMethods;
+
+const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
   (props, ref) => {
     // establish provided props
     const {
@@ -399,6 +401,9 @@ export const InputOutline = forwardRef<InputOutlineMethods, InputOutlineProps>(
     );
   }
 );
+
+const InputOutline = InputOutlineComponent;
+export { InputOutline };
 
 // color issue
 LogBox.ignoreLogs(['You are setting the style `{ color: ... }` as a prop.']);
