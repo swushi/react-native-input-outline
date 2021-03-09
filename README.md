@@ -41,11 +41,9 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 | `TextInput Props`   | Inherited Props                                                                 |             | [TextInput Props](https://reactnative.dev/docs/textinput#props) |
 | `placeholder`       | The string that will be rendered before text input has been entered.            |             | `string`                                                        |
 | `fontSize`          | Font size for TextInput.                                                        | `14`        | `number`                                                        |
-| `fontColor`         | Color of TextInput's font.                                                      | `black`     | `string`                                                        |
 | `fontFamily`        | Font Family for all fonts.                                                      | `undefined` | `string`                                                        |
+| `fontColor`         | Color of TextInput's font.                                                      | `black`     | `string`                                                        |
 | `backgroundColor`   | Background color of the TextInput.                                              | `'white'`   | `string`                                                        |
-| `paddingVertical`   | Vertical padding for TextInput Container. Used to calculate animations.         | `12`        | `number`                                                        |
-| `paddingHorizontal` | Horizontal padding for TextInput Container.                                     | `16`        | `number`                                                        |
 | `activeColor`       | Color when focused.                                                             | `'blue'`    | `string`                                                        |
 | `inactiveColor`     | Color when blurred (not focused).                                               | `'black'`   | `string`                                                        |
 | `errorColor`        | Color that is displayed when in error state.                                    | `'red'`     | `string`                                                        |
@@ -54,6 +52,8 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 | `roundness`         | Border Radius for Container.                                                    | `5`         | `number`                                                        |
 | `characterCount`    | Will show a character count helper text and limit the characters being entered. | `undefined` | `number`                                                        |
 | `assistiveText`     | Will show a character count helper text and limit the characters being entered. | `undefined` | `string`                                                        |
+| `paddingVertical`   | Vertical padding for TextInput Container. Used to calculate animations.         | `12`        | `number`                                                        |
+| `paddingHorizontal` | Horizontal padding for TextInput Container.                                     | `16`        | `number`                                                        |
 
 
 ### Methods
