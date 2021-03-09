@@ -161,15 +161,16 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
       fontFamily,
       error,
       style,
+      value: _providedValue = '',
       onChangeText,
       ...inputProps
     } = props;
     // value of input
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(_providedValue);
 
     // animation vars
     const inputRef = useRef<TextInput>(null);
-    const placeholderMap = useSharedValue(0);
+    const placeholderMap = useSharedValue(_providedValue ? 1 : 0);
     const placeholderSize = useSharedValue(0);
     const colorMap = useSharedValue(0);
 
@@ -365,6 +366,7 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
               maxLength={characterCount ? characterCount : undefined}
               selectionColor={error ? errorColor : activeColor}
               placeholder=""
+              value={value}
             />
           </View>
         </TouchableWithoutFeedback>

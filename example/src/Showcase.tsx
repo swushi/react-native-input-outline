@@ -61,6 +61,7 @@ const Showcase = ({}: Props) => {
           style={styles.input}
           placeholder="Icon Support"
           characterCount={25}
+          value="Hello"
           textContentType="oneTimeCode"
           onChangeText={clearError}
           autoCorrect={false}
