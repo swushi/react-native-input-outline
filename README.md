@@ -47,7 +47,7 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 | `activeColor`       | Color when focused.                                                             | `'blue'`    | `string`                                                        |
 | `inactiveColor`     | Color when blurred (not focused).                                               | `'black'`   | `string`                                                        |
 | `errorColor`        | Color that is displayed when in error state.                                    | `'red'`     | `string`                                                        |
-| `error`             | Error message to be displayed. If anything is provided to error besided         | `undefined` | `string`                                                        |
+| `error`             | Error message is displayed. If anything is provided to error besides null or undefined, then the component is within an error state, thus displaying the error message provided here and errorColor.         | `undefined` | `string`                                                        |
 | `trailingIcon`      | Trailing Icon for the Input.                                                    | `undefined` | `React.FC`                                                      |
 | `roundness`         | Border Radius for Container.                                                    | `5`         | `number`                                                        |
 | `characterCount`    | Will show a character count helper text and limit the characters being entered. | `undefined` | `number`                                                        |
