@@ -213,6 +213,11 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
       return null;
     }, [trailingIcon]);
 
+    // handle value update
+    useEffect(() => {
+      if (_providedValue.length) placeholderMap.value = withTiming(1); // focused;
+      setValue(_providedValue);
+    }, [_providedValue, placeholderMap]);
     // error handling
     useEffect(() => {
       if (error) {

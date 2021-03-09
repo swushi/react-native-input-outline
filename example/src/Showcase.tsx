@@ -13,9 +13,10 @@ const darkForeground = '#2b2b2b';
 
 const Showcase = ({}: Props) => {
   const [error1, setError1] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState('Initial Value');
 
   const handlePress = () => {
-    setError1("Yikes! That's a warning!");
+    setValue('New Value!');
   };
 
   const clearError = () => {
@@ -61,7 +62,7 @@ const Showcase = ({}: Props) => {
           style={styles.input}
           placeholder="Icon Support"
           characterCount={25}
-          value="Hello"
+          value={value}
           textContentType="oneTimeCode"
           onChangeText={clearError}
           autoCorrect={false}
