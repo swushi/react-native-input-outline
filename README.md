@@ -1,9 +1,13 @@
-# react-native-input-outline
+# React Native Input Outline
 
-I built this library because of all the performance issues I noticed in other TextInput libraries I noticed.
-This library is extremely performant thanks to Reanimated v2, and I'm very proud of it.
+A performant TextInput with fully configurable options 🚀
 
-Performant React Native Text Inputs built with Reanimated 2.
+![React Native Bottom Sheet](./mockup-1.gif)
+
+I built this library because of all the performance issues I noticed in other TextInput libraries.
+This library is extremely performant thanks to Reanimated v2. Leave a star if you enjoy it!
+
+Performant React Native TextInputs built with Reanimated 2.
 
 ## Installation
 
