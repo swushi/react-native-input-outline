@@ -131,12 +131,45 @@ export interface InputOutlineProps extends TextInputProps {
    * @type number
    */
   characterCount?: number;
+  characterCountFontSize?: number;
+  characterCountFontFamily?: string;
+  characterCountColor?: string;
   /**
    * Helper text that can be displayed to assist users with Inputs. `error` prop will override this.
    * @default undefined
    * @type string
    */
   assistiveText?: string;
+  /**
+   * Font size of assistive text.
+   * @default 10
+   * @type number
+   */
+  assistiveTextFontSize?: number;
+  /**
+   * Color of assistive text.
+   * @default inactiveColor
+   * @type string
+   */
+  assistiveTextColor?: string;
+  /**
+   * Font family of assistive text.
+   * @default undefined
+   * @type string
+   */
+  assistiveFontFamily?: string;
+  /**
+   * Font size of error text.
+   * @default 10
+   * @type number
+   */
+  errorFontSize?: number;
+  /**
+   * Font family of error text.
+   * @default undefined
+   * @type string
+   */
+  errorFontFamily?: string;
 }
 
 type InputOutline = InputOutlineMethods;
@@ -145,22 +178,42 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
   (props, ref) => {
     // establish provided props
     const {
-      placeholder = 'Placeholder',
-      fontSize = 14,
-      fontColor = 'black',
-      activeColor = 'blue',
+      // theme colors
       inactiveColor = 'grey',
-      paddingVertical = 12,
-      paddingHorizontal = 16,
+      activeColor = 'blue',
       errorColor = 'red',
       backgroundColor = 'white',
-      roundness = 5,
-      characterCount,
-      trailingIcon,
-      assistiveText,
+
+      // fonts
+      fontSize = 14,
+      fontColor = 'black',
       fontFamily,
+
       error,
+      errorFontSize = 10,
+      errorFontFamily,
+
+      assistiveText,
+      assistiveTextFontSize = 10,
+      assistiveTextColor = inactiveColor,
+      assistiveFontFamily,
+
+      characterCount,
+      characterCountFontFamily,
+      characterCountColor = inactiveColor,
+      characterCountFontSize = 10,
+
+      // styling
+      paddingHorizontal = 16,
+      paddingVertical = 12,
+      roundness = 5,
       style,
+
+      // features
+      placeholder = 'Placeholder',
+      trailingIcon,
+
+      // others
       value: _providedValue = '',
       onChangeText,
       ...inputProps
@@ -324,10 +377,10 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
       errorText: {
         position: 'absolute',
         color: errorColor,
-        fontSize: 10,
-        bottom: -15,
+        fontSize: errorFontSize,
+        fontFamily: errorFontFamily,
+        bottom: -errorFontSize - 7,
         left: paddingHorizontal,
-        fontFamily,
       },
       trailingIcon: {
         position: 'absolute',
@@ -336,19 +389,19 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
       },
       counterText: {
         position: 'absolute',
-        color: error ? errorColor : inactiveColor,
-        fontSize: 10,
-        bottom: -15,
+        color: error ? errorColor : characterCountColor,
+        fontSize: characterCountFontSize,
+        bottom: -characterCountFontSize - 7,
         right: paddingHorizontal,
-        fontFamily,
+        fontFamily: characterCountFontFamily,
       },
       assistiveText: {
         position: 'absolute',
-        color: inactiveColor,
-        fontSize: 10,
-        bottom: -15,
+        color: assistiveTextColor,
+        fontSize: assistiveTextFontSize,
+        bottom: -assistiveTextFontSize - 7,
         left: paddingHorizontal,
-        fontFamily,
+        fontFamily: assistiveFontFamily,
       },
     });
 

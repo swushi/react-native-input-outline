@@ -17,6 +17,7 @@ const Showcase = ({}: Props) => {
 
   const handlePress = () => {
     setValue('New Value!');
+    setError1('Error!');
   };
 
   const clearError = () => {
@@ -63,6 +64,9 @@ const Showcase = ({}: Props) => {
           placeholder="Icon Support"
           characterCount={25}
           value={value}
+          characterCountColor="pink"
+          assistiveTextColor="orange"
+          assistiveTextFontSize={12}
           textContentType="oneTimeCode"
           onChangeText={clearError}
           autoCorrect={false}
