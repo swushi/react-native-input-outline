@@ -198,6 +198,7 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
       assistiveTextColor = inactiveColor,
       assistiveFontFamily,
 
+      characterCount,
       characterCountFontFamily,
       characterCountColor = inactiveColor,
       characterCountFontSize = 10,
@@ -210,7 +211,6 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
 
       // features
       placeholder = 'Placeholder',
-      characterCount,
       trailingIcon,
 
       // others
