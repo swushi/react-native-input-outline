@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { InputOutline } from 'react-native-input-outline';
+import { InputOutline, InputStandard } from 'react-native-input-outline';
 
 interface Props {}
 
@@ -28,7 +28,7 @@ const Showcase = ({}: Props) => {
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.label}>react-native-input-outline</Text>
-        <InputOutline
+        <InputStandard
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}
@@ -57,7 +57,7 @@ const Showcase = ({}: Props) => {
           fontColor={lightBackground}
           backgroundColor={darkForeground}
         />
-        <InputOutline
+        <InputStandard
           activeColor={primary}
           inactiveColor={lightBackground}
           style={styles.input}

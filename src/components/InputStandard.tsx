@@ -206,7 +206,6 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
       // styling
       paddingHorizontal = 16,
       paddingVertical = 12,
-      roundness = 5,
       style,
 
       // features
@@ -339,12 +338,11 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
 
     const styles = StyleSheet.create({
       container: {
-        borderWidth: 1,
-        borderRadius: roundness,
+        borderBottomWidth: 1,
         alignSelf: 'stretch',
         flexDirection: 'row',
         paddingVertical,
-        paddingHorizontal,
+        paddingRight: paddingHorizontal,
         backgroundColor,
       },
       inputContainer: {
@@ -361,7 +359,6 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
       placeholder: {
         position: 'absolute',
         top: paddingVertical,
-        left: paddingHorizontal,
       },
       placeholderText: {
         fontSize,
