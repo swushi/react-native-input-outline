@@ -2,8 +2,6 @@
 
 A performant TextInput with fully configurable options 🚀
 
-![React Native Bottom Sheet](./mockup-1.gif)
-
 ![React Native Bottom Sheet](./mockup.png)
 
 I built this library because of all the performance issues I noticed in other TextInput libraries.
