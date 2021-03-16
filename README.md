@@ -22,7 +22,7 @@ Reanimated v2 is required for this library to work.
 ```js
 import React, { useRef, useState } from 'react';
 import { View, Button } from 'react-native';
-import { InputOutline } from 'react-native-input-outline';
+import { InputOutline, InputStandard } from 'react-native-input-outline';
 
 export default () => {
   const inputRef = useRef < InputOutline > null; // fully TypeScript enabled
@@ -42,6 +42,8 @@ export default () => {
         ref={inputRef}
         error={error} // wont take effect until a message is passed
       />
+
+      <InputStandard /> 
 
       <Button onPress={showError} title="Set Input Error" />
     </View>
