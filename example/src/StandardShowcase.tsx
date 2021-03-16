@@ -3,9 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { InputStandard } from 'react-native-input-outline';
 
-const darkBackground = '#3a469c';
+const darkBackground = '#1e1e1e';
 // const lightForeground = '#fff';
-const darkForeground = '#03aae2';
+const darkForeground = '#00d1ac';
 
 export default () => {
   return (
@@ -21,6 +21,8 @@ export default () => {
         activeColor={'#fff'}
         inactiveColor={darkForeground}
         placeholder="Your Name"
+        fontColor="#fff"
+        keyboardAppearance="dark"
       />
       <InputStandard
         style={styles.input}

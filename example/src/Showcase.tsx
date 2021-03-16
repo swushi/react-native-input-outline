@@ -5,7 +5,7 @@ import { InputOutline } from 'react-native-input-outline';
 
 interface Props {}
 
-const primary = 'lightblue';
+const primary = '#00d1ac';
 const lightBackground = '#e4e4e4';
 const darkBackground = '#1e1e1e';
 // const lightForeground = '#fff';
@@ -64,8 +64,8 @@ const Showcase = ({}: Props) => {
           placeholder="Icon Support"
           characterCount={25}
           value={value}
-          characterCountColor="pink"
-          assistiveTextColor="orange"
+          characterCountColor="#fff"
+          assistiveTextColor="#fff"
           assistiveTextFontSize={12}
           textContentType="oneTimeCode"
           onChangeText={clearError}
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   label: {
-    color: primary,
+    color: '#fff',
     fontSize: 30,
     fontWeight: '500',
     textAlign: 'center',
