@@ -235,15 +235,20 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
       setValue('');
     };
 
+    const errorState = useCallback(
+      () => error !== null && error !== undefined,
+      [error]
+    );
+
     const handleFocus = () => {
       placeholderMap.value = withTiming(1); // focused
-      if (!error) colorMap.value = withTiming(1); // active
+      if (!errorState()) colorMap.value = withTiming(1); // active
       focus();
     };
 
     const handleBlur = () => {
       if (!value) placeholderMap.value = withTiming(0); // blur
-      if (!error) colorMap.value = withTiming(0); // inactive
+      if (!errorState()) colorMap.value = withTiming(0); // inactive
       blur();
     };
 
@@ -272,12 +277,13 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
     }, [_providedValue, placeholderMap]);
     // error handling
     useEffect(() => {
-      if (error) {
+      console.log(errorState());
+      if (errorState()) {
         colorMap.value = 2; // error -- no animation here, snap to color immediately
       } else {
         colorMap.value = isFocused() ? 1 : 0; // to active or inactive color if focused
       }
-    }, [error, colorMap]);
+    }, [error, colorMap, errorState]);
 
     const animatedPlaceholderStyles = useAnimatedStyle(() => ({
       transform: [
@@ -387,7 +393,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
       },
       counterText: {
         position: 'absolute',
-        color: error ? errorColor : characterCountColor,
+        color: errorState() ? errorColor : characterCountColor,
         fontSize: characterCountFontSize,
         bottom: -characterCountFontSize - 7,
         right: paddingHorizontal,
@@ -420,7 +426,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
               onBlur={handleBlur}
               onChangeText={handleChangeText}
               maxLength={characterCount ? characterCount : undefined}
-              selectionColor={error ? errorColor : activeColor}
+              selectionColor={errorState() ? errorColor : activeColor}
               placeholder=""
               value={value}
             />
@@ -448,7 +454,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
             style={styles.counterText}
           >{`${value.length} / ${characterCount}`}</Text>
         )}
-        {error ? (
+        {errorState() ? (
           <Text style={[styles.errorText]}>{error}</Text>
         ) : (
           assistiveText && (

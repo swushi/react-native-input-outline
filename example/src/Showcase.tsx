@@ -17,7 +17,7 @@ const Showcase = ({}: Props) => {
 
   const handlePress = () => {
     setValue('New Value!');
-    setError1('Error!');
+    setError1('');
   };
 
   const clearError = () => {
