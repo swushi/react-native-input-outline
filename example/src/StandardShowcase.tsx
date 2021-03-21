@@ -23,6 +23,7 @@ export default () => {
         placeholder="Your Name"
         fontColor="#fff"
         keyboardAppearance="dark"
+        error={''}
       />
       <InputStandard
         style={styles.input}

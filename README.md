@@ -66,7 +66,7 @@ All vanilla [ReactNative TextInput Props](https://reactnative.dev/docs/textinput
 | `fontSize` | Font size for TextInput. | `14` | `number` |
 | `fontFamily` | Font Family for all fonts. | `undefined` | `string` |
 | `fontColor` | Color of TextInput's font. | `black` | `string` |
-| `error` | Error message is displayed. If anything is provided to error besides null or undefined, then the component is within an error state, thus displaying the error message provided here and errorColor. | `undefined` | `string` |
+| `error` | Error message is displayed. If anything is provided to error besides null or undefined, then the component is within an error state, thus displaying the error message provided here and errorColor. | `undefined` | `string | undefined | null` |
 | `errorFontSize` | Font size of error text. | `10` | `number` |
 | `errorFontFamily` | Font family of error text. | `undefined` | `string` |
 | `assistiveText` | Will show a character count helper text and limit the characters being entered. | `undefined` | `string` |
