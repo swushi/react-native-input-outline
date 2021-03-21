@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-outline",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Performant React Native Text Inputs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
