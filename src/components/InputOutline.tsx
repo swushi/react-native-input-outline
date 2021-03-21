@@ -354,6 +354,7 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
         alignItems: 'center',
       },
       input: {
+        flex: 1,
         fontSize,
         fontFamily,
         color: fontColor,
