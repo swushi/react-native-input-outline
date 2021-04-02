@@ -277,7 +277,6 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
     }, [_providedValue, placeholderMap]);
     // error handling
     useEffect(() => {
-      console.log(errorState());
       if (errorState()) {
         colorMap.value = 2; // error -- no animation here, snap to color immediately
       } else {
