@@ -374,7 +374,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
         position: 'absolute',
         top: -1,
         left: paddingHorizontal - 3,
-        backgroundColor,
+        backgroundColor: "transparent",
         height: 1,
       },
       errorText: {
