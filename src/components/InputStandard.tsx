@@ -374,7 +374,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
         position: 'absolute',
         top: -1,
         left: paddingHorizontal - 3,
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         height: 1,
       },
       errorText: {
@@ -420,7 +420,7 @@ const InputStandardComponent = forwardRef<InputStandard, InputStandardProps>(
               {...inputProps}
               ref={inputRef}
               style={styles.input}
-              pointerEvents="none"
+              pointerEvents={isFocused() ? 'auto' : 'none'}
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChangeText={handleChangeText}

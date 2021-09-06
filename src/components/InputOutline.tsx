@@ -423,7 +423,7 @@ const InputOutlineComponent = forwardRef<InputOutline, InputOutlineProps>(
               {...inputProps}
               ref={inputRef}
               style={styles.input}
-              pointerEvents="none"
+              pointerEvents={isFocused() ? 'auto' : 'none'}
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChangeText={handleChangeText}
