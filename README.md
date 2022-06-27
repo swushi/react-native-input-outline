@@ -25,8 +25,8 @@ import { View, Button } from 'react-native';
 import { InputOutline, InputStandard } from 'react-native-input-outline';
 
 export default () => {
-  const inputRef = useRef < InputOutline > null; // fully TypeScript enabled
-  const [error, setError] = (useState < string) | (undefined > undefined);
+  const inputRef = useRef<InputOutline>(null); // fully TypeScript enabled
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const showError = () => {
     setError('This is your error message!');
