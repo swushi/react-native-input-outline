@@ -15,7 +15,7 @@ Performant React Native TextInputs built with Reanimated 2.
 yarn add react-native-reanimated@2.0.0-rc.0 react-native-input-outline
 ```
 
-Reanimated v2 is required for this library to work.
+Reanimated v2 is required for this library to work. Please follow Reanimated [Installation instruction](https://docs.swmansion.com/react-native-reanimated/docs/2.0.x/) to setup Reanimated v2.
 
 ## Usage
 
